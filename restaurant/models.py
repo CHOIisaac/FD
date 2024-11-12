@@ -28,5 +28,33 @@ class Restaurant(models.Model):
     tags = models.ManyToManyField("Tag", blank=True)
 
 
+class CuisineType(models.Model):
+    name = models.CharField("이름", max_length=20)
+
+    class Meta:
+        verbose_name = "음식 종류"
+        verbose_name_plural = "음식 종류"
+
+    def __str__(self):
+        return self.name
+
+
+class RestaurantCategory(models.Model):
+    name = models.CharField("이름", max_length=20)
+    cuisine_type = models.ForeignKey(
+        "CuisineType",
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+    )
+
+    class Meta:
+        verbose_name = "가게 카테고리"
+        verbose_name_plural = "가게 카테고리"
+
+    def __str__(self):
+        return self.name
+
+
 class RestaurantImage(models.Model):
     restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
