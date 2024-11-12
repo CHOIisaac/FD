@@ -58,3 +58,14 @@ class RestaurantCategory(models.Model):
 
 class RestaurantImage(models.Model):
     restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
+
+
+class Tag(models.Model):
+    name = models.CharField("이름", max_length=100)
+
+    class Meta:
+        verbose_name = "태그"
+        verbose_name_plural = "태그"
+
+    def __str__(self):
+        return self.name
